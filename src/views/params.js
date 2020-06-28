@@ -56,7 +56,7 @@ export default {
   // 时间快捷键
   pickerOptions: {
     disabledDate(time) {
-      return time.getTime() < Date.now() -(8.64e7*2);
+      return time.getTime() < Date.now() - 8.64e7;
     },
     shortcuts: [{
       text: '三天',
