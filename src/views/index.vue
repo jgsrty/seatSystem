@@ -43,8 +43,8 @@
     </el-card>
     <!-- 添加新座位 -->
     <cus-dialog header="添加区域" :visible.sync="showAreaDialog" width="300px">
-      <el-form size="small" :model="areaParams" ref="areaParams" label-width="90px">
-        <el-form-item label="区域名">
+      <el-form size="small" :model="areaParams" ref="areaParams" label-position="left" label-width="90px">
+        <el-form-item label="区域名：">
           <el-input class="mini-input" v-model="areaParams.name"></el-input>
         </el-form-item>
       </el-form>
@@ -54,8 +54,8 @@
     </cus-dialog>
     <!-- 添加新座位 -->
     <cus-dialog header="添加新座位" :visible.sync="showSeatDialog" width="300px">
-      <el-form size="small" :model="seatParams" ref="seatParams" label-width="90px">
-        <el-form-item label="座位编号">
+      <el-form size="small" :model="seatParams" ref="seatParams" label-position="left" label-width="90px">
+        <el-form-item label="座位编号：">
           <el-input class="mini-input" v-model="seatParams.number"></el-input>
         </el-form-item>
       </el-form>
@@ -265,6 +265,7 @@ export default {
           .transaction(["seat"], "readwrite")
           .objectStore("seat")
           .add(this.seatParams);
+        console.log(request)
         request.onsuccess = e => {
           this.showSeatDialog = false;
           this.getSeatsByArea(item.id);
@@ -480,7 +481,7 @@ export default {
           store.createIndex("areaIndex", "area", { unique: false }); //所属区域
           store.createIndex("occupyIndex", "occupy", { unique: false }); //是否使用
           store.createIndex("userIndex", "user", { unique: false }); //使用者
-          store.createIndex("userIdCardIndex", "userIdCard", { unique: true }); //座位使用者身份证
+          store.createIndex("userIdCardIndex", "userIdCard", { unique: false }); //座位使用者身份证
           store.createIndex("startTimeIndex", "startTime", { unique: false }); //占用开始时间
           store.createIndex("endTimeIndex", "endTime", { unique: false }); //占用结束时间
         }
